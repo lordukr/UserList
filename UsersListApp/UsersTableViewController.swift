@@ -14,7 +14,7 @@ import SDWebImage
 class UsersTableViewController: UITableViewController {
     static let tableViewCellIdentifier = "tableViewIdentifier"
     
-    var items: [User]? = Array.init()
+    var items: [User] = []
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -25,8 +25,10 @@ class UsersTableViewController: UITableViewController {
         tableView.separatorStyle = .none
         
         NetworkService.downloadUsersList(20, 1) { (usersList) in
-            self.items = usersList?.items
-            self.tableView.reloadData()
+            if let items = usersList?.items {
+                self.items = items
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -39,17 +41,17 @@ class UsersTableViewController: UITableViewController {
     //MARK: - UITableViewDataSource
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items?.count ?? 0
+        return items.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userTableViewCell", for: indexPath) as? UserTableViewCell
 
-        let user = items?[indexPath.row]
+        let user = items[indexPath.row]
         
-        cell?.userFullNameLabel.text = user?.userFullName.userFullName()
-        cell?.userPhoneNumberLabel.text = user?.phoneNumber
-        cell?.userAvatarImageURL = user?.userPhotoURL.thumb
+        cell?.userFullNameLabel.text = user.userFullName.userFullName()
+        cell?.userPhoneNumberLabel.text = user.phoneNumber
+        cell?.userAvatarImageURL = user.userPhotoURL.thumb
         
         return cell!
     }

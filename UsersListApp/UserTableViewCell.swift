@@ -16,15 +16,15 @@ class UserTableViewCell: UITableViewCell {
     
     var userAvatarImageURL: String? {
         didSet{
-            guard let avatarImageView = userAvatarImageView else {
+            guard let userAvatarImageURL = userAvatarImageURL else {
+                return
+            }
+
+            guard let avatarURL = URL.init(string: userAvatarImageURL) else {
                 return
             }
             
-            guard let avatarURL = URL.init(string: userAvatarImageURL!) else {
-                return
-            }
-            
-            avatarImageView.sd_setImage(with: avatarURL, completed: nil)
+            userAvatarImageView.sd_setImage(with: avatarURL, completed: nil)
         }
     }
     
