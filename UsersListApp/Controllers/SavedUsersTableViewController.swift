@@ -18,6 +18,20 @@ class SavedUsersTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "UserTableViewCell", bundle: nil), forCellReuseIdentifier: "userTableViewCell")
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let viewController = segue.destination as? DetailsViewController
+        
+        if let user = sender as? User {
+            viewController?.selectedUser = user
+        } else {
+            let alert = UIAlertController(title: "Error", message: "Failed to open user", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alert.addAction(alertAction)
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     // MARK: - UITableViewDataSource
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

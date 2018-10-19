@@ -31,11 +31,27 @@ class UsersTableViewController: UITableViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let viewController = segue.destination as? DetailsViewController
+        
+        if let user = sender as? User {
+            viewController?.selectedUser = user
+        } else {
+            let alert = UIAlertController(title: "Error", message: "Failed to open user", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alert.addAction(alertAction)
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     //MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "showDetailsSegue", sender: self)
+        let selectedUser = items[indexPath.row]
+        
+        performSegue(withIdentifier: "showDetailsSegue", sender: selectedUser)
     }
     
     //MARK: - UITableViewDataSource
