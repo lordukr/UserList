@@ -60,6 +60,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0DC75A62217A5698003DF6BF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1FE015F02177C94C006CD11F /* User.swift */,
+				1FE015F22177CDED006CD11F /* User+UserFullName.swift */,
+				1FE015F42177CE1C006CD11F /* User+UserAvatar.swift */,
+				1FE015F82177D7FD006CD11F /* Users.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0DC75A63217A56A6003DF6BF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0DC75A67217A57A2003DF6BF /* Storyboards */,
+				0DC75A66217A5799003DF6BF /* Xibs */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0DC75A64217A576D003DF6BF /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				1FE015DF2177BB4F006CD11F /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		0DC75A65217A5788003DF6BF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1FE015FA2177DBB7006CD11F /* UsersTableViewController.swift */,
+				0DC75A582178D375003DF6BF /* SavedUsersTableViewController.swift */,
+				1FE016022177EAE8006CD11F /* UserTableViewCell.swift */,
+				0DC75A602178DC71003DF6BF /* DetailsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0DC75A66217A5799003DF6BF /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				0DC75A5D2178D540003DF6BF /* UserTableViewCell.xib */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		0DC75A67217A57A2003DF6BF /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				1FE015DC2177BB4D006CD11F /* Main.storyboard */,
+				1FE015E12177BB4F006CD11F /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		1FE015CC2177BB4D006CD11F = {
 			isa = PBXGroup;
 			children = (
@@ -81,22 +137,13 @@
 		1FE015D72177BB4D006CD11F /* UsersListApp */ = {
 			isa = PBXGroup;
 			children = (
+				0DC75A64217A576D003DF6BF /* Assets */,
+				0DC75A65217A5788003DF6BF /* Controllers */,
+				0DC75A62217A5698003DF6BF /* Models */,
 				1FE015ED2177BF68006CD11F /* Service */,
 				1FE015EA2177BDFD006CD11F /* Support Classes */,
+				0DC75A63217A56A6003DF6BF /* Views */,
 				1FE015D82177BB4D006CD11F /* AppDelegate.swift */,
-				1FE015DC2177BB4D006CD11F /* Main.storyboard */,
-				1FE015DF2177BB4F006CD11F /* Assets.xcassets */,
-				1FE015E12177BB4F006CD11F /* LaunchScreen.storyboard */,
-				1FE015E42177BB4F006CD11F /* Info.plist */,
-				1FE015F02177C94C006CD11F /* User.swift */,
-				1FE015F22177CDED006CD11F /* User+UserFullName.swift */,
-				1FE015F42177CE1C006CD11F /* User+UserAvatar.swift */,
-				1FE015F82177D7FD006CD11F /* Users.swift */,
-				1FE015FA2177DBB7006CD11F /* UsersTableViewController.swift */,
-				0DC75A582178D375003DF6BF /* SavedUsersTableViewController.swift */,
-				1FE016022177EAE8006CD11F /* UserTableViewCell.swift */,
-				0DC75A5D2178D540003DF6BF /* UserTableViewCell.xib */,
-				0DC75A602178DC71003DF6BF /* DetailsViewController.swift */,
 			);
 			path = UsersListApp;
 			sourceTree = "<group>";
@@ -104,6 +151,7 @@
 		1FE015EA2177BDFD006CD11F /* Support Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1FE015E42177BB4F006CD11F /* Info.plist */,
 				1FE015EB2177BE2C006CD11F /* Podfile */,
 			);
 			path = "Support Classes";
