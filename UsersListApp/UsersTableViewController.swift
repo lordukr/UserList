@@ -16,13 +16,12 @@ class UsersTableViewController: UITableViewController {
     
     var items: [User] = []
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.separatorStyle = .none
+        tableView.separatorStyle = .singleLine
+        tableView.separatorInset = .zero
+        
+        tableView.register(UINib(nibName: "UserTableViewCell", bundle: nil), forCellReuseIdentifier: "userTableViewCell")
         
         NetworkService.downloadUsersList(20, 1) { (usersList) in
             if let items = usersList?.items {
@@ -36,6 +35,7 @@ class UsersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "showDetailsSegue", sender: self)
     }
     
     //MARK: - UITableViewDataSource
