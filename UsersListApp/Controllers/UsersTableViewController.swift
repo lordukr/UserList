@@ -12,7 +12,11 @@ import SDWebImage
 
 
 class UsersTableViewController: UITableViewController {
-    static let tableViewCellIdentifier = "tableViewIdentifier"
+    let amountOfItemsToLoad = 20
+    var page: Int = 1
+    var isLoading = false
+    
+    var selectedUser: User?
     
     var items: [User] = []
     
@@ -23,19 +27,22 @@ class UsersTableViewController: UITableViewController {
         
         tableView.register(UINib(nibName: "UserTableViewCell", bundle: nil), forCellReuseIdentifier: "userTableViewCell")
         
-        NetworkService.downloadUsersList(20, 1) { (usersList) in
-            if let items = usersList?.items {
-                self.items = items
-                self.tableView.reloadData()
-            }
-        }
+        loadItems(page)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let viewController = segue.destination as? DetailsViewController
         
-        if let user = sender as? User {
-            viewController?.selectedUser = user
+        if let user = selectedUser {
+            let storedUser = StoredUser()
+            storedUser.firstName = user.userFullName.firstName
+            storedUser.lastName = user.userFullName.lastName
+            storedUser.avatarURLString = user.userPhotoURL.medium
+            storedUser.email = user.userEmail
+            storedUser.phoneNumber = user.phoneNumber
+            
+            viewController?.selectedUser = storedUser
+            viewController?.isAdd = true
         } else {
             let alert = UIAlertController(title: "Error", message: "Failed to open user", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
@@ -45,13 +52,32 @@ class UsersTableViewController: UITableViewController {
         }
     }
     
+    func loadItems(_ page: Int) {
+        isLoading = true
+        NetworkService.downloadUsersList(amountOfItemsToLoad, page) { (usersList) in
+            self.isLoading = false
+            if let items = usersList?.items {
+                self.page += 1
+                self.items += items
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
     //MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let selectedUser = items[indexPath.row]
+        let user = items[indexPath.row]
+        selectedUser = user
         
-        performSegue(withIdentifier: "showDetailsSegue", sender: selectedUser)
+        performSegue(withIdentifier: "showDetailsSegue", sender: nil)
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == items.count - 3 && isLoading == false {
+            loadItems(page)
+        }
     }
     
     //MARK: - UITableViewDataSource
@@ -65,7 +91,7 @@ class UsersTableViewController: UITableViewController {
 
         let user = items[indexPath.row]
         
-        cell?.userFullNameLabel.text = user.userFullName.userFullName()
+        cell?.userFullNameLabel.text = user.userFullName.userFullName().capitalized
         cell?.userPhoneNumberLabel.text = user.phoneNumber
         cell?.userAvatarImageURL = user.userPhotoURL.thumb
         
