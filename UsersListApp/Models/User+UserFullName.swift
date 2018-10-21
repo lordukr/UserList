@@ -8,25 +8,13 @@
 
 import Foundation
 
-struct UserFullName: Codable {
+class UserFullName: NSObject, Codable {
     var firstName: String
     var lastName: String
     
     enum CodingKeys: String, CodingKey {
         case firstName = "first"
         case lastName = "last"
-    }
-    
-    func encode(_ encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(firstName, forKey: .firstName)
-        try container.encode(lastName, forKey: .lastName)
-    }
-    
-    init(_ decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        firstName = try container.decode(String.self, forKey: .firstName)
-        lastName = try container.decode(String.self, forKey: .lastName)
     }
 }
 
