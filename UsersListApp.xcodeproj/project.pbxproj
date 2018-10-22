@@ -126,13 +126,6 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		0DC75A76217D373F003DF6BF /* HelperClasses */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HelperClasses;
-			sourceTree = "<group>";
-		};
 		1FE015CC2177BB4D006CD11F = {
 			isa = PBXGroup;
 			children = (
@@ -154,7 +147,6 @@
 		1FE015D72177BB4D006CD11F /* UsersListApp */ = {
 			isa = PBXGroup;
 			children = (
-				0DC75A76217D373F003DF6BF /* HelperClasses */,
 				0DC75A64217A576D003DF6BF /* Assets */,
 				0DC75A65217A5788003DF6BF /* Controllers */,
 				0DC75A62217A5698003DF6BF /* Models */,
