@@ -37,8 +37,6 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
     var isAdd: Bool?
     var selectedUser: StoredUser?
     
-    var initialInsets: UIEdgeInsets?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -62,8 +60,6 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
         phoneNumberTextField.mask = phoneMask
         phoneNumberTextField.text = user.phoneNumber
         phoneNumberTextField.delegate = self
-        
-        initialInsets = scrollView.contentInset
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillHideNotification, object: nil)
