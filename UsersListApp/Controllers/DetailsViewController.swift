@@ -83,7 +83,6 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @objc func keyboardWillShow(notification:NSNotification){
-        
         var userInfo = notification.userInfo!
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
@@ -94,7 +93,6 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func keyboardWillHide(notification:NSNotification){
-        
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
     }
