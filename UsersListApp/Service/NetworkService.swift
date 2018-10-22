@@ -17,7 +17,6 @@ class NetworkService: NSObject {
         let params = ["results" : count, "page" : page]
         
         Alamofire.request("https://randomuser.me/api/", parameters: params, encoding: URLEncoding(destination: .methodDependent)).responseJSON { response in
-            
             switch response.result {
             case .success:
                 guard let data = response.data else {

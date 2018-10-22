@@ -13,10 +13,10 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(showSaved), name: NSNotification.Name(rawValue: "AZTabBarRequestAction"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showSavedTabBarItem), name: NSNotification.Name(rawValue: "AZTabBarRequestAction"), object: nil)
     }
     
-    @objc func showSaved(sender: Notification) {
+    @objc func showSavedTabBarItem(sender: Notification) {
         selectedIndex = 1
     }
     

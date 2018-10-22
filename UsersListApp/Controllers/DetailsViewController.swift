@@ -109,6 +109,8 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
         return maskTextField.shouldChangeCharacters(in: range, replacementString: string)
     }
     
+    //MARK: - Camera/Gallery methods
+    
     func saveImage(_ image: UIImage, _ imagePath: NSURL?) {
         if let imageURL = imagePath {
             pickedImageURL = imageURL
@@ -138,24 +140,6 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
         } else {
             userAvatar.image = image
         }
-    }
-    
-    @objc func actionChangeAvatar(_ tapGesture: UITapGestureRecognizer) {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let openCameraAlertAction = UIAlertAction(title: "Take Photo", style: .default) { (action) in
-            self.authorizationStatus(.camera)
-        }
-        let openPhotoLibraryAlertAction = UIAlertAction(title: "Open Gallery", style: .default) { (action) in
-            self.authorizationStatus(.photoLibrary)
-            
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alertController.addAction(openCameraAlertAction)
-        alertController.addAction(openPhotoLibraryAlertAction)
-        alertController.addAction(cancelAction)
-        
-        present(alertController, animated: true, completion: nil)
     }
     
     func authorizationStatus(_ status: AuthorizationStatusAccessType) {
@@ -252,6 +236,8 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+    //MARK: - Validation
+    
     func validateEmail(candidate: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         
@@ -270,6 +256,26 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(alertAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    //MARK: - Actions
+    
+    @objc func actionChangeAvatar(_ tapGesture: UITapGestureRecognizer) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let openCameraAlertAction = UIAlertAction(title: "Take Photo", style: .default) { (action) in
+            self.authorizationStatus(.camera)
+        }
+        let openPhotoLibraryAlertAction = UIAlertAction(title: "Open Gallery", style: .default) { (action) in
+            self.authorizationStatus(.photoLibrary)
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(openCameraAlertAction)
+        alertController.addAction(openPhotoLibraryAlertAction)
+        alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)
     }
