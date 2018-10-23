@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 import SDWebImage
+import DZNEmptyDataSet
 
-
-class UsersTableViewController: UITableViewController {
+class UsersTableViewController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     let amountOfItemsToLoad = 20
     var page: Int = 1
     var isLoading = false
-    
+
     var selectedUser: User?
     
     var items: [User] = []
@@ -24,6 +24,8 @@ class UsersTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = .zero
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         
         tableView.register(UINib(nibName: "UserTableViewCell", bundle: nil), forCellReuseIdentifier: "userTableViewCell")
         
@@ -54,14 +56,51 @@ class UsersTableViewController: UITableViewController {
     
     func loadItems(_ page: Int) {
         isLoading = true
-        NetworkService.downloadUsersList(amountOfItemsToLoad, page) { (usersList) in
+        NetworkService().downloadUsersList(amountOfItemsToLoad, page) { (usersList, error) in
             self.isLoading = false
+            
+            if error != nil {
+                let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(okAction)
+                
+                self.present(alertController, animated: true, completion: nil)
+                
+                return
+            }
+            
             if let items = usersList?.items {
                 self.page += 1
                 self.items += items
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    //MARK: - DZNEmptyDataSetSource
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "No Data"
+        
+        let attributes: [NSAttributedString.Key : Any] = [.foregroundColor: UIColor.black]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
+        if isLoading {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func emptyDataSetDidAppear(_ scrollView: UIScrollView!) {
+        tableView.separatorStyle = .none
+    }
+    
+    func emptyDataSetDidDisappear(_ scrollView: UIScrollView!) {
+        tableView.separatorStyle = .singleLine
     }
     
     //MARK: - UITableViewDelegate

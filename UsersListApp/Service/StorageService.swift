@@ -10,13 +10,20 @@ import UIKit
 import RealmSwift
 
 class StorageService: NSObject {
-    let realm: Realm?
-    let results: Results<StoredUser>?
-    
-    override init() {
-        realm = try? Realm()
-        results = try? Realm().objects(StoredUser.self).sorted(byKeyPath: "insertDate", ascending: true)
-        
-        super.init()
+    var realm: Realm? {
+        do {
+            return try Realm()
+        } catch {
+            print("Failed to create Realm")
+            print("Error: \(error)")
+            
+            return nil
+        }
+    }
+
+    var results: Results<StoredUser>? {
+        get {
+            return self.realm?.objects(StoredUser.self).sorted(byKeyPath: "insertDate", ascending: true)
+        }
     }
 }

@@ -304,7 +304,9 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
             return
         }
         
-        StorageService().realm?.beginWrite()
+        let storageService = StorageService()
+        
+        storageService.realm?.beginWrite()
         if isAdd {
             let newUser = StoredUser()
             newUser.firstName = firstName
@@ -314,7 +316,7 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
             newUser.avatarURLString = pickedImageURL?.absoluteString ?? selectedUser?.avatarURLString
             newUser.insertDate = Date()
             
-            StorageService().realm?.add(newUser)
+            storageService.realm?.add(newUser)
         } else {
             selectedUser?.firstName = firstName
             selectedUser?.lastName = lastName
@@ -324,9 +326,10 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         
         do {
-            try StorageService().realm?.commitWrite()
+            try storageService.realm?.commitWrite()
         } catch  {
-            
+            print("Error")
+            print("Failed to \(isAdd ? "insert" : "update") item")
         }
         
         self.navigationController?.popToRootViewController(animated: false)

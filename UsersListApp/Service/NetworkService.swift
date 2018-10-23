@@ -9,25 +9,27 @@
 import Foundation
 import Alamofire
 
-typealias NetworkServiceResponse = ((UsersListResponse?) -> Void)?
+typealias NetworkServiceResponse = ((_ response: UsersListResponse?,_ error: Error?) -> Void)?
 
 class NetworkService: NSObject {
     
-    class func downloadUsersList(_ count: Int, _ page: Int, _ completionBlock: NetworkServiceResponse) {
+    func downloadUsersList(_ count: Int, _ page: Int, _ completionBlock: NetworkServiceResponse) {
         let params = ["results" : count, "page" : page]
         
         Alamofire.request("https://randomuser.me/api/", parameters: params, encoding: URLEncoding(destination: .methodDependent)).responseJSON { response in
             switch response.result {
             case .success:
                 guard let data = response.data else {
-                    completionBlock?(nil)
+                    let error = NSError(domain: "Missing data for response", code: response.response?.statusCode ?? 500, userInfo: nil)
+                    completionBlock?(nil, error)
                     return
                 }
-                let users = try! JSONDecoder().decode(UsersListResponse.self, from: data)
                 
-                completionBlock?(users)
+                let users = try? JSONDecoder().decode(UsersListResponse.self, from: data)
+                
+                completionBlock?(users, nil)
             case .failure:
-                completionBlock?(nil)
+                completionBlock?(nil, response.error)
             }
         }
     }

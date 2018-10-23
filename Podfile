@@ -9,4 +9,5 @@ target 'UsersListApp' do
     pod 'Alamofire'
     pod 'SDWebImage'
     pod 'VMaskTextField'
+    pod 'DZNEmptyDataSet'
 end
