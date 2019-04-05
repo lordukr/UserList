@@ -56,23 +56,19 @@ class UsersTableViewController: UITableViewController, DZNEmptyDataSetSource, DZ
     
     func loadItems(_ page: Int) {
         isLoading = true
-        NetworkService().downloadUsersList(amountOfItemsToLoad, page) { (usersList, error) in
+        NetworkService().downloadUsersList(amountOfItemsToLoad, page) { (result) in
             self.isLoading = false
-            
-            if error != nil {
-                let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+            switch result {
+            case .success(let result):
+                self.page += 1
+                self.items += result.items
+                self.tableView.reloadData()
+            case .failure(let error):
+                let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alertController.addAction(okAction)
                 
                 self.present(alertController, animated: true, completion: nil)
-                
-                return
-            }
-            
-            if let items = usersList?.items {
-                self.page += 1
-                self.items += items
-                self.tableView.reloadData()
             }
         }
     }
