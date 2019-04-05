@@ -26,6 +26,7 @@
 		1FE015F92177D7FD006CD11F /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE015F82177D7FD006CD11F /* Users.swift */; };
 		1FE015FB2177DBB7006CD11F /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE015FA2177DBB7006CD11F /* UsersTableViewController.swift */; };
 		1FE016032177EAE9006CD11F /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE016022177EAE8006CD11F /* UserTableViewCell.swift */; };
+		1FEBF7D0225798100092E3BD /* UsersDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBF7CF225798100092E3BD /* UsersDataSource.swift */; };
 		5AE31218B1D52E1BA02E02A4 /* Pods_UsersListApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EB193809E71A8E177C79850 /* Pods_UsersListApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		1FE015F82177D7FD006CD11F /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		1FE015FA2177DBB7006CD11F /* UsersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		1FE016022177EAE8006CD11F /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		1FEBF7CF225798100092E3BD /* UsersDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersDataSource.swift; sourceTree = "<group>"; };
 		3B01D8EA0D9CC96DCB3E5400 /* Pods-UsersListApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UsersListApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-UsersListApp/Pods-UsersListApp.release.xcconfig"; sourceTree = "<group>"; };
 		8996627B9B39C5B3ED272B46 /* Pods-UsersListApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UsersListApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UsersListApp/Pods-UsersListApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +107,7 @@
 				1FE016022177EAE8006CD11F /* UserTableViewCell.swift */,
 				0DC75A602178DC71003DF6BF /* DetailsViewController.swift */,
 				0DC75A74217D2C95003DF6BF /* TabBarViewController.swift */,
+				1FEBF7CF225798100092E3BD /* UsersDataSource.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -276,6 +279,8 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-UsersListApp/Pods-UsersListApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/DTModelStorage/DTModelStorage.framework",
+				"${BUILT_PRODUCTS_DIR}/DTTableViewManager/DTTableViewManager.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -287,6 +292,8 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTModelStorage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTTableViewManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -336,6 +343,7 @@
 				1FE015EF2177BF90006CD11F /* NetworkService.swift in Sources */,
 				0DC75A73217B84BC003DF6BF /* StoredUser.swift in Sources */,
 				1FE015F52177CE1C006CD11F /* User+UserAvatar.swift in Sources */,
+				1FEBF7D0225798100092E3BD /* UsersDataSource.swift in Sources */,
 				1FE015D92177BB4D006CD11F /* AppDelegate.swift in Sources */,
 				0DC75A75217D2C95003DF6BF /* TabBarViewController.swift in Sources */,
 				0DC75A71217B6083003DF6BF /* StorageService.swift in Sources */,

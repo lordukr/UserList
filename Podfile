@@ -10,4 +10,5 @@ target 'UsersListApp' do
     pod 'SDWebImage'
     pod 'VMaskTextField'
     pod 'DZNEmptyDataSet'
+    pod 'DTTableViewManager'
 end

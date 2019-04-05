@@ -8,8 +8,11 @@
 
 import SDWebImage
 import UIKit
+import DTModelStorage
 
-class UserTableViewCell: UITableViewCell {
+class UserTableViewCell: UITableViewCell, ModelTransfer {
+    typealias ModelType = User
+    
     @IBOutlet private weak var userAvatarImageView: UIImageView!
     @IBOutlet weak var userFullNameLabel: UILabel!
     @IBOutlet weak var userPhoneNumberLabel: UILabel!
@@ -37,5 +40,13 @@ class UserTableViewCell: UITableViewCell {
         super.prepareForReuse()
         
         userAvatarImageView.image = nil
+    }
+}
+
+extension UserTableViewCell {
+    func update(with model: UserTableViewCell.ModelType) {
+        userFullNameLabel.text = model.userFullName.userFullName().capitalized
+        userPhoneNumberLabel.text = model.phoneNumber
+        userAvatarImageURL = model.userPhotoURL.thumb
     }
 }

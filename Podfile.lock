@@ -1,5 +1,10 @@
 PODS:
   - Alamofire (4.7.3)
+  - DTModelStorage (7.2.1):
+    - DTModelStorage/Core (= 7.2.1)
+  - DTModelStorage/Core (7.2.1)
+  - DTTableViewManager (6.4.0):
+    - DTModelStorage (~> 7.2.0)
   - DZNEmptyDataSet (1.8.1)
   - Realm (3.11.1):
     - Realm/Headers (= 3.11.1)
@@ -13,6 +18,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - DTTableViewManager
   - DZNEmptyDataSet
   - RealmSwift
   - SDWebImage
@@ -21,6 +27,8 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - DTModelStorage
+    - DTTableViewManager
     - DZNEmptyDataSet
     - Realm
     - RealmSwift
@@ -29,12 +37,14 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  DTModelStorage: 0152e9b2f7ccc593f6b4ae99696e6470d4f676bb
+  DTTableViewManager: 08ea8335c0769c91bf2ffd0e843346b894d41e27
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Realm: 037c5919b9ceb59d6beed5d3b031096856b119b3
   RealmSwift: c9580133e73ef40ed340401af2dbc9a5790dfea7
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   VMaskTextField: e77fe33633f999c5c38e70bed0afece0625624a4
 
-PODFILE CHECKSUM: 5636faf1ea739421309f19b241b79412cac4355c
+PODFILE CHECKSUM: a911f429e411c19ba55c7940b9cd426eea13f4e9
 
 COCOAPODS: 1.5.3

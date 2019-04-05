@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import DTModelStorage
 
 class User: NSObject, Codable {
     var userFullName: UserFullName

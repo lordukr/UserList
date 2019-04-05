@@ -213,6 +213,8 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
             })
         case .restricted, .denied:
             self.openSettingsFor(.photoLibrary)
+        @unknown default:
+            break
         }
     }
     

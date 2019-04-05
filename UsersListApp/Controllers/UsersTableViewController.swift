@@ -10,15 +10,15 @@ import Foundation
 import UIKit
 import SDWebImage
 import DZNEmptyDataSet
+import DTModelStorage
+import DTTableViewManager
 
-class UsersTableViewController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class UsersTableViewController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DTTableViewManageable {
     let amountOfItemsToLoad = 20
     var page: Int = 1
     var isLoading = false
 
     var selectedUser: User?
-    
-    var items: [User] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,13 @@ class UsersTableViewController: UITableViewController, DZNEmptyDataSetSource, DZ
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
         
-        tableView.register(UINib(nibName: "UserTableViewCell", bundle: nil), forCellReuseIdentifier: "userTableViewCell")
+        manager.configureEvents(for: UserTableViewCell.self) { [weak self] cellType, modelType in
+            manager.register(cellType)
+            manager.didSelect(cellType, { ( _, modelType, indexPath) in
+                self?.selectedUser = modelType
+                self?.performSegue(withIdentifier: "showDetailsSegue", sender: nil)
+            })
+        }
         
         loadItems(page)
     }
@@ -60,9 +66,7 @@ class UsersTableViewController: UITableViewController, DZNEmptyDataSetSource, DZ
             self.isLoading = false
             switch result {
             case .success(let result):
-                self.page += 1
-                self.items += result.items
-                self.tableView.reloadData()
+                self.manager.memoryStorage.addItems(result.items)
             case .failure(let error):
                 let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -101,36 +105,35 @@ class UsersTableViewController: UITableViewController, DZNEmptyDataSetSource, DZ
     
     //MARK: - UITableViewDelegate
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let user = items[indexPath.row]
-        selectedUser = user
-        
-        performSegue(withIdentifier: "showDetailsSegue", sender: nil)
-    }
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == items.count - 3 && isLoading == false {
-            loadItems(page)
-        }
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        let user = items[indexPath.row]
+//        selectedUser = user
+//
+//        performSegue(withIdentifier: "showDetailsSegue", sender: nil)
+//    }
+//
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if indexPath.row == items.count - 3 && isLoading == false {
+//            loadItems(page)
+//        }
+//    }
     
     //MARK: - UITableViewDataSource
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "userTableViewCell", for: indexPath) as? UserTableViewCell
-
-        let user = items[indexPath.row]
-        
-        cell?.userFullNameLabel.text = user.userFullName.userFullName().capitalized
-        cell?.userPhoneNumberLabel.text = user.phoneNumber
-        cell?.userAvatarImageURL = user.userPhotoURL.thumb
-        
-        return cell!
-    }
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return items.count
+//    }
+//
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "userTableViewCell", for: indexPath) as? UserTableViewCell else {
+//            return UITableViewCell()
+//        }
+//
+//        let user = items[indexPath.row]
+//
+//
+//        return cell
+//    }
     
 }
