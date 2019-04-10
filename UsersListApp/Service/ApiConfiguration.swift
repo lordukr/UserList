@@ -55,5 +55,4 @@ extension APIConfiguration {
         
         return urlRequest
     }
-    
 }

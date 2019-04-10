@@ -13,7 +13,7 @@ class ApiClient {
         AF.request(route).validate(statusCode: 200..<299).responseDecodable(decoder: decoder, completionHandler: completion)
     }
     
-    static func performRequest(route: APIConfiguration, decoder: JSONDecoder = JSONDecoder(), completion: @escaping (DataResponse<Any>) -> Void) {
+    static func performRequest(route: APIConfiguration, completion: @escaping (DataResponse<Any>) -> Void) {
         AF.request(route).validate(statusCode: 200..<299).responseJSON(completionHandler: completion)
     }
 }
