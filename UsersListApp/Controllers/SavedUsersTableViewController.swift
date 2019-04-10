@@ -8,9 +8,8 @@
 
 import UIKit
 import RealmSwift
-import DZNEmptyDataSet
 
-class SavedUsersTableViewController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class SavedUsersTableViewController: UITableViewController {
     var selectedUser: StoredUser?
     var notificationToken: NotificationToken?
     var storageService = StorageService()
@@ -19,8 +18,6 @@ class SavedUsersTableViewController: UITableViewController, DZNEmptyDataSetSourc
         super.viewDidLoad()
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = .zero
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
         
         tableView.register(UINib(nibName: "UserTableViewCell", bundle: nil), forCellReuseIdentifier: "userTableViewCell")
         
@@ -56,24 +53,6 @@ class SavedUsersTableViewController: UITableViewController, DZNEmptyDataSetSourc
             
             self.present(alert, animated: true, completion: nil)
         }
-    }
-    
-    //MARK: - DZNEmptyDataSetSource
-    
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "No Data"
-        
-        let attributes: [NSAttributedString.Key : Any] = [.foregroundColor: UIColor.black]
-        
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-    
-    func emptyDataSetDidAppear(_ scrollView: UIScrollView!) {
-        tableView.separatorStyle = .none
-    }
-    
-    func emptyDataSetDidDisappear(_ scrollView: UIScrollView!) {
-        tableView.separatorStyle = .singleLine
     }
     
     // MARK: - UITableViewDataSource

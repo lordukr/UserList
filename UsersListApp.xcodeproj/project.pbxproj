@@ -14,12 +14,16 @@
 		0DC75A71217B6083003DF6BF /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC75A70217B6083003DF6BF /* StorageService.swift */; };
 		0DC75A73217B84BC003DF6BF /* StoredUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC75A72217B84BC003DF6BF /* StoredUser.swift */; };
 		0DC75A75217D2C95003DF6BF /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC75A74217D2C95003DF6BF /* TabBarViewController.swift */; };
+		1FBA3B50225CC21900C59EA7 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBA3B4F225CC21900C59EA7 /* ApiClient.swift */; };
+		1FBA3B52225CC26100C59EA7 /* ApiConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBA3B51225CC26100C59EA7 /* ApiConfiguration.swift */; };
+		1FBA3B56225DE1C200C59EA7 /* ApiConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBA3B55225DE1C200C59EA7 /* ApiConstants.swift */; };
+		1FBA3B5B225DED5B00C59EA7 /* UsersApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBA3B5A225DED5B00C59EA7 /* UsersApiRouter.swift */; };
+		1FBA3B5E225DEDC000C59EA7 /* UsersClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBA3B5D225DEDC000C59EA7 /* UsersClient.swift */; };
 		1FE015D92177BB4D006CD11F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE015D82177BB4D006CD11F /* AppDelegate.swift */; };
 		1FE015DE2177BB4D006CD11F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FE015DC2177BB4D006CD11F /* Main.storyboard */; };
 		1FE015E02177BB4F006CD11F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FE015DF2177BB4F006CD11F /* Assets.xcassets */; };
 		1FE015E32177BB4F006CD11F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FE015E12177BB4F006CD11F /* LaunchScreen.storyboard */; };
 		1FE015EC2177BE2C006CD11F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 1FE015EB2177BE2C006CD11F /* Podfile */; };
-		1FE015EF2177BF90006CD11F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE015EE2177BF90006CD11F /* NetworkService.swift */; };
 		1FE015F12177C94C006CD11F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE015F02177C94C006CD11F /* User.swift */; };
 		1FE015F32177CDED006CD11F /* User+UserFullName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE015F22177CDED006CD11F /* User+UserFullName.swift */; };
 		1FE015F52177CE1C006CD11F /* User+UserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE015F42177CE1C006CD11F /* User+UserAvatar.swift */; };
@@ -39,6 +43,11 @@
 		0DC75A72217B84BC003DF6BF /* StoredUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredUser.swift; sourceTree = "<group>"; };
 		0DC75A74217D2C95003DF6BF /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		1EB193809E71A8E177C79850 /* Pods_UsersListApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UsersListApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FBA3B4F225CC21900C59EA7 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		1FBA3B51225CC26100C59EA7 /* ApiConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConfiguration.swift; sourceTree = "<group>"; };
+		1FBA3B55225DE1C200C59EA7 /* ApiConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConstants.swift; sourceTree = "<group>"; };
+		1FBA3B5A225DED5B00C59EA7 /* UsersApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersApiRouter.swift; sourceTree = "<group>"; };
+		1FBA3B5D225DEDC000C59EA7 /* UsersClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersClient.swift; sourceTree = "<group>"; };
 		1FE015D52177BB4D006CD11F /* UsersListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UsersListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE015D82177BB4D006CD11F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FE015DD2177BB4D006CD11F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -46,7 +55,6 @@
 		1FE015E22177BB4F006CD11F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1FE015E42177BB4F006CD11F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FE015EB2177BE2C006CD11F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		1FE015EE2177BF90006CD11F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		1FE015F02177C94C006CD11F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1FE015F22177CDED006CD11F /* User+UserFullName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+UserFullName.swift"; sourceTree = "<group>"; };
 		1FE015F42177CE1C006CD11F /* User+UserAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+UserAvatar.swift"; sourceTree = "<group>"; };
@@ -129,6 +137,22 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		1FBA3B59225DED4700C59EA7 /* Routers */ = {
+			isa = PBXGroup;
+			children = (
+				1FBA3B5A225DED5B00C59EA7 /* UsersApiRouter.swift */,
+			);
+			path = Routers;
+			sourceTree = "<group>";
+		};
+		1FBA3B5C225DEDAD00C59EA7 /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				1FBA3B5D225DEDC000C59EA7 /* UsersClient.swift */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
 		1FE015CC2177BB4D006CD11F = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +178,8 @@
 				0DC75A65217A5788003DF6BF /* Controllers */,
 				0DC75A62217A5698003DF6BF /* Models */,
 				1FE015ED2177BF68006CD11F /* Service */,
+				1FBA3B5C225DEDAD00C59EA7 /* Clients */,
+				1FBA3B59225DED4700C59EA7 /* Routers */,
 				1FE015EA2177BDFD006CD11F /* Support Classes */,
 				0DC75A63217A56A6003DF6BF /* Views */,
 				1FE015D82177BB4D006CD11F /* AppDelegate.swift */,
@@ -174,8 +200,10 @@
 		1FE015ED2177BF68006CD11F /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				1FE015EE2177BF90006CD11F /* NetworkService.swift */,
 				0DC75A70217B6083003DF6BF /* StorageService.swift */,
+				1FBA3B4F225CC21900C59EA7 /* ApiClient.swift */,
+				1FBA3B51225CC26100C59EA7 /* ApiConfiguration.swift */,
+				1FBA3B55225DE1C200C59EA7 /* ApiConstants.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -281,7 +309,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/DTModelStorage/DTModelStorage.framework",
 				"${BUILT_PRODUCTS_DIR}/DTTableViewManager/DTTableViewManager.framework",
-				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -294,7 +321,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTModelStorage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTTableViewManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -334,13 +360,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FBA3B5B225DED5B00C59EA7 /* UsersApiRouter.swift in Sources */,
 				1FE015F12177C94C006CD11F /* User.swift in Sources */,
 				1FE016032177EAE9006CD11F /* UserTableViewCell.swift in Sources */,
 				0DC75A592178D375003DF6BF /* SavedUsersTableViewController.swift in Sources */,
+				1FBA3B52225CC26100C59EA7 /* ApiConfiguration.swift in Sources */,
+				1FBA3B56225DE1C200C59EA7 /* ApiConstants.swift in Sources */,
 				1FE015F32177CDED006CD11F /* User+UserFullName.swift in Sources */,
 				1FE015F92177D7FD006CD11F /* Users.swift in Sources */,
 				1FE015FB2177DBB7006CD11F /* UsersTableViewController.swift in Sources */,
-				1FE015EF2177BF90006CD11F /* NetworkService.swift in Sources */,
+				1FBA3B5E225DEDC000C59EA7 /* UsersClient.swift in Sources */,
 				0DC75A73217B84BC003DF6BF /* StoredUser.swift in Sources */,
 				1FE015F52177CE1C006CD11F /* User+UserAvatar.swift in Sources */,
 				1FEBF7D0225798100092E3BD /* UsersDataSource.swift in Sources */,
@@ -348,6 +377,7 @@
 				0DC75A75217D2C95003DF6BF /* TabBarViewController.swift in Sources */,
 				0DC75A71217B6083003DF6BF /* StorageService.swift in Sources */,
 				0DC75A612178DC71003DF6BF /* DetailsViewController.swift in Sources */,
+				1FBA3B50225CC21900C59EA7 /* ApiClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
