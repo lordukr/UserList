@@ -40,14 +40,7 @@ class UsersTableViewController: UITableViewController, DTTableViewManageable {
         let viewController = segue.destination as? DetailsViewController
         
         if let user = selectedUser {
-            let storedUser = StoredUser()
-            storedUser.firstName = user.userFullName.firstName
-            storedUser.lastName = user.userFullName.lastName
-            storedUser.avatarURLString = user.userPhotoURL.medium
-            storedUser.email = user.userEmail
-            storedUser.phoneNumber = user.phoneNumber
-            
-            viewController?.selectedUser = storedUser
+            viewController?.selectedUser = user
             viewController?.isAdd = true
         } else {
             let alert = UIAlertController(title: "Error", message: "Failed to open user", preferredStyle: .alert)

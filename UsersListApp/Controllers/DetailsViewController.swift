@@ -31,40 +31,38 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: VMaskTextField!
     @IBOutlet weak var scrollView: UIScrollView!
-    
+
     var pickedImageURL: NSURL?
     
     var isAdd: Bool?
-    var selectedUser: StoredUser?
+    var selectedUser: User! = nil
+    
+    let dataSource = UserDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let user = selectedUser else {
-            return
-        }
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(actionChangeAvatar))
         
         changePhotoLabel.addGestureRecognizer(tapGesture)
         changePhotoLabel.isUserInteractionEnabled = true
         
         userAvatar.layer.cornerRadius = userAvatar.frame.height / 2
-        userAvatar.sd_setImage(with: URL(string: user.avatarURLString ?? ""), completed: nil)
+        userAvatar.sd_setImage(with: URL(string: selectedUser.userPhotoURL.large), completed: nil)
         
-        firstNameTextField.text = user.firstName?.capitalized
-        lastNameTextField.text = user.lastName?.capitalized
-        emailTextField.text = user.email
+        firstNameTextField.text = selectedUser.userFullName.firstName.capitalized
+        lastNameTextField.text = selectedUser.userFullName.lastName.capitalized
+        emailTextField.text = selectedUser.userEmail
         
-        let phoneMask = (user.phoneNumber?.components(separatedBy: CharacterSet.decimalDigits))?.joined(separator: "#")
+        let phoneMask = (selectedUser.phoneNumber.components(separatedBy: CharacterSet.decimalDigits)).joined(separator: "#")
         phoneNumberTextField.mask = phoneMask
-        phoneNumberTextField.text = user.phoneNumber
+        phoneNumberTextField.text = selectedUser.phoneNumber
         phoneNumberTextField.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
+
     //MARK: - UIImagePickerControllerDelegate
     
     @objc func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -279,13 +277,8 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         present(alertController, animated: true, completion: nil)
     }
-    
+
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
-        guard let isAdd = isAdd else {
-            self.navigationController?.popToRootViewController(animated: true)
-            return
-        }
-        
         let email = emailTextField.text ?? ""
         
         if !validateEmail(candidate: email) {
@@ -306,32 +299,14 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
             return
         }
         
-        let storageService = StorageService()
+        var user = selectedUser
+        user?.phoneNumber = phoneNumberTextField.text ?? ""
+        user?.userFullName.firstName = firstName
+        user?.userFullName.lastName = lastName
+        user?.userEmail = email
         
-        storageService.realm?.beginWrite()
-        if isAdd {
-            let newUser = StoredUser()
-            newUser.firstName = firstName
-            newUser.lastName = lastName
-            newUser.email = email
-            newUser.phoneNumber = phoneNumberTextField.text ?? ""
-            newUser.avatarURLString = pickedImageURL?.absoluteString ?? selectedUser?.avatarURLString
-            newUser.insertDate = Date()
-            
-            storageService.realm?.add(newUser)
-        } else {
-            selectedUser?.firstName = firstName
-            selectedUser?.lastName = lastName
-            selectedUser?.email = email
-            selectedUser?.phoneNumber = phoneNumberTextField.text ?? ""
-            selectedUser?.avatarURLString = pickedImageURL?.absoluteString ?? selectedUser?.avatarURLString
-        }
-        
-        do {
-            try storageService.realm?.commitWrite()
-        } catch  {
-            print("Error")
-            print("Failed to \(isAdd ? "insert" : "update") item")
+        if let usr = user {
+            dataSource.saveUser(usr)
         }
         
         self.navigationController?.popToRootViewController(animated: false)

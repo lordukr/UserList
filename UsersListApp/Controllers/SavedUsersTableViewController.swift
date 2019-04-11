@@ -7,37 +7,53 @@
 //
 
 import UIKit
-import RealmSwift
+import DTTableViewManager
 
-class SavedUsersTableViewController: UITableViewController {
-    var selectedUser: StoredUser?
-    var notificationToken: NotificationToken?
-    var storageService = StorageService()
+class SavedUsersTableViewController: UITableViewController, DTTableViewManageable {
+    var selectedUser: User?
+    
+    let dataSource = UserDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dataSource.delegate = self
+        
+        manager.configureEvents(for: UserTableViewCell.self) { [weak self] cellType, modelType in
+            manager.register(cellType)
+            manager.didSelect(cellType, { ( _, modelType, indexPath) in
+                self?.selectedUser = modelType
+                self?.performSegue(withIdentifier: "showDetailsSegue", sender: nil)
+            })
+            manager.trailingSwipeActionsConfiguration(for: cellType, { ( _, modelType, indexPath) -> UISwipeActionsConfiguration? in
+                
+                let deleteAction = UIContextualAction(style: .destructive, title: nil) { (handler, view, completionHandler) in
+                    self?.dataSource.deleteUser(modelType, completion: { (result) in
+                        switch result {
+                        case .success(_):
+                            completionHandler(true)
+                        case .failure(_):
+                            completionHandler(false)
+                        }
+                    })
+                }
+                deleteAction.image = UIImage(named: "delete")
+                deleteAction.backgroundColor = .red
+                
+                return UISwipeActionsConfiguration(actions: [deleteAction])
+            })
+        }
+        
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = .zero
         
         tableView.register(UINib(nibName: "UserTableViewCell", bundle: nil), forCellReuseIdentifier: "userTableViewCell")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        notificationToken = storageService.results?.observe({ (changes: RealmCollectionChange) in
-            switch changes {
-            case .initial:
-                self.tableView.reloadData()
-                break
-            case .update(_, let deletions, let insertions, let modifications):
-                self.tableView.beginUpdates()
-                self.tableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.tableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.tableView.endUpdates()
-                break
-            case .error(let err):
-                print(err)
-                break
-            }
-        })
+        dataSource.loadLocalUsers()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -50,51 +66,23 @@ class SavedUsersTableViewController: UITableViewController {
             let alert = UIAlertController(title: "Error", message: "Failed to open user", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alert.addAction(alertAction)
-            
+
             self.present(alert, animated: true, completion: nil)
         }
     }
-    
-    // MARK: - UITableViewDataSource
+}
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return storageService.results?.count ?? 0
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "userTableViewCell", for: indexPath) as? UserTableViewCell
-        let user = storageService.results?[indexPath.row]
-        
-        cell?.userFullNameLabel.text = user?.fullName().capitalized
-        cell?.userPhoneNumberLabel.text = user?.phoneNumber
-        cell?.userAvatarImageURL = user?.avatarURLString
-        
-        return cell!
+extension SavedUsersTableViewController: UserDataSourceDelegate {
+    func didLoadData() {
+        self.manager.memoryStorage.removeAllItems()
+        self.manager.memoryStorage.addItems(dataSource.models)
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            guard let objectToDelete = storageService.results?[indexPath.row] else {
-                print("Unable to retrieve object from storage")
-                return
-            }
-            
-            storageService.realm?.beginWrite()
-            storageService.realm?.delete(objectToDelete)
-            do {
-                try storageService.realm?.commitWrite()
-            } catch {
-                print("Unable to delete item:\(error)")
-            }
-        }
-    }
-
-    //MARK: - UITableViewDelegate
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        selectedUser = storageService.results?[indexPath.row]
+    func didFail(with error: Error) {
+        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
         
-        performSegue(withIdentifier: "showDetailsSegue", sender: self)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
