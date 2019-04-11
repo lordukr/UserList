@@ -14,8 +14,18 @@ class StoredUser: Object {
     @objc dynamic var lastName: String?
     @objc dynamic var phoneNumber: String?
     @objc dynamic var email: String?
-    @objc dynamic var avatarURLString: String?
+    @objc dynamic var avatarURLs: StoredImageURL?
     @objc dynamic var insertDate: Date?
+}
+
+extension StoredUser: Comparable {
+    static func < (lhs: StoredUser, rhs: StoredUser) -> Bool {
+        if lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName && rhs.phoneNumber == lhs.phoneNumber {
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
 extension StoredUser {

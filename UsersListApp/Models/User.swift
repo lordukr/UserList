@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import DTModelStorage
 
-class User: NSObject, Codable {
+struct User: Codable {
     var userFullName: UserFullName
     var phoneNumber: String
     var userPhotoURL: UserAvatar
@@ -19,5 +20,33 @@ class User: NSObject, Codable {
         case phoneNumber = "phone"
         case userPhotoURL = "picture"
         case userEmail = "email"
+    }
+}
+
+struct UserFullName: Codable {
+    var title: String
+    var firstName: String
+    var lastName: String
+    
+    enum CodingKeys: String, CodingKey {
+        case title
+        case firstName = "first"
+        case lastName = "last"
+    }
+}
+
+extension UserFullName {
+    func userFullName() -> String {
+        return title + "." + firstName + " " + lastName
+    }
+}
+
+struct UserAvatar: Codable {
+    var large: String
+    var thumb: String
+    
+    enum CodingKeys: String, CodingKey {
+        case large
+        case thumb = "thumbnail"
     }
 }

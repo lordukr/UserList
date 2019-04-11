@@ -6,8 +6,8 @@ use_frameworks!
 
 target 'UsersListApp' do
     pod 'RealmSwift'
-    pod 'Alamofire'
+    pod 'Alamofire', '~> 5.0.0-beta.4'
     pod 'SDWebImage'
     pod 'VMaskTextField'
-    pod 'DZNEmptyDataSet'
+    pod 'DTTableViewManager'
 end
