@@ -63,7 +63,7 @@ class UserDataSource {
     }
     
     func deleteUser(_ user: User, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let storedUser = try? self.realm?.objects(StoredUser.self).first(where: { $0.firstName == user.userFullName.firstName && $0.lastName == user.userFullName.lastName && $0.phoneNumber == user.phoneNumber})
+        let storedUser = self.realm?.objects(StoredUser.self).first(where: { $0.firstName == user.userFullName.firstName && $0.lastName == user.userFullName.lastName && $0.phoneNumber == user.phoneNumber})
         
         guard let user = storedUser else {
             completion(.failure(NSError(domain: "User not found", code: -098, userInfo: nil)))
@@ -93,7 +93,7 @@ class UserDataSource {
         avatarURLs.thumbnail = user.userPhotoURL.thumb
         localUser.avatarURLs = avatarURLs
         
-        let object = try? self.realm?.objects(StoredUser.self).first(where: { $0 == localUser })
+        let object = self.realm?.objects(StoredUser.self).first(where: { $0 == localUser })
         
         if let storedObject = object {
             realm?.beginWrite()
