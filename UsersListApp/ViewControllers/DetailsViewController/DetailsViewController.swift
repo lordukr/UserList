@@ -72,7 +72,7 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? NSURL
-            self.saveImage(image, imageURL ?? nil)
+            saveImage(image, imageURL ?? nil)
         } else{
             print("Something went wrong in  image")
         }
@@ -83,9 +83,9 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
     @objc func keyboardWillShow(notification:NSNotification){
         var userInfo = notification.userInfo!
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        keyboardFrame = view.convert(keyboardFrame, from: nil)
         
-        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        var contentInset:UIEdgeInsets = scrollView.contentInset
         contentInset.bottom = keyboardFrame.size.height
         scrollView.contentInset = contentInset
     }
@@ -151,7 +151,7 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
         let status = AVCaptureDevice.authorizationStatus(for: .video)
         switch status{
         case .authorized:
-            self.openCamera()
+            openCamera()
             
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { granted in
@@ -160,7 +160,7 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
                 }
             }
         case .denied, .restricted:
-            self.openSettingsFor(.camera)
+            openSettingsFor(.camera)
             return
             
         default:
@@ -203,14 +203,14 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
             openPhotoGallery()
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization({ (status) in
-                if status == PHAuthorizationStatus.authorized{
+                if status == PHAuthorizationStatus.authorized {
                     if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
                         self.openPhotoGallery()
                     }
                 }
             })
         case .restricted, .denied:
-            self.openSettingsFor(.photoLibrary)
+            openSettingsFor(.photoLibrary)
         @unknown default:
             break
         }
@@ -309,7 +309,7 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
             dataSource.saveUser(usr)
         }
         
-        self.navigationController?.popToRootViewController(animated: false)
+        navigationController?.popToRootViewController(animated: false)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AZTabBarRequestAction"), object: nil)
     }
 }

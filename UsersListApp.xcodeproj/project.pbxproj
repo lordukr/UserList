@@ -11,7 +11,7 @@
 		0DC75A5F2178D540003DF6BF /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DC75A5D2178D540003DF6BF /* UserTableViewCell.xib */; };
 		0DC75A612178DC71003DF6BF /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC75A602178DC71003DF6BF /* DetailsViewController.swift */; };
 		0DC75A6F217B0B04003DF6BF /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 0DC75A6E217B0B04003DF6BF /* Podfile.lock */; };
-		0DC75A71217B6083003DF6BF /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC75A70217B6083003DF6BF /* StorageService.swift */; };
+		0DC75A71217B6083003DF6BF /* RealmStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC75A70217B6083003DF6BF /* RealmStorageService.swift */; };
 		0DC75A73217B84BC003DF6BF /* StoredUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC75A72217B84BC003DF6BF /* StoredUser.swift */; };
 		0DC75A75217D2C95003DF6BF /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC75A74217D2C95003DF6BF /* TabBarViewController.swift */; };
 		1FBA3B50225CC21900C59EA7 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBA3B4F225CC21900C59EA7 /* ApiClient.swift */; };
@@ -38,7 +38,7 @@
 		0DC75A5D2178D540003DF6BF /* UserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
 		0DC75A602178DC71003DF6BF /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		0DC75A6E217B0B04003DF6BF /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = SOURCE_ROOT; };
-		0DC75A70217B6083003DF6BF /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		0DC75A70217B6083003DF6BF /* RealmStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStorageService.swift; sourceTree = "<group>"; };
 		0DC75A72217B84BC003DF6BF /* StoredUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredUser.swift; sourceTree = "<group>"; };
 		0DC75A74217D2C95003DF6BF /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		1EB193809E71A8E177C79850 /* Pods_UsersListApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UsersListApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,17 +104,17 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		0DC75A65217A5788003DF6BF /* Controllers */ = {
+		0DC75A65217A5788003DF6BF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1FE015FA2177DBB7006CD11F /* UsersTableViewController.swift */,
-				0DC75A582178D375003DF6BF /* SavedUsersTableViewController.swift */,
-				1FE016022177EAE8006CD11F /* UserTableViewCell.swift */,
-				0DC75A602178DC71003DF6BF /* DetailsViewController.swift */,
-				0DC75A74217D2C95003DF6BF /* TabBarViewController.swift */,
+				1FBA3B6D2260D75E00C59EA7 /* UserTableViewCell */,
+				1FBA3B6C2260D74800C59EA7 /* TabBarViewController */,
+				1FBA3B6A2260D70900C59EA7 /* DetailsViewController */,
+				1FBA3B692260D6F900C59EA7 /* SavedUsersTableViewController */,
+				1FBA3B682260D6E600C59EA7 /* UserTableViewController */,
 				1FEBF7CF225798100092E3BD /* UsersDataSource.swift */,
 			);
-			path = Controllers;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		0DC75A66217A5799003DF6BF /* Xibs */ = {
@@ -145,9 +145,93 @@
 		1FBA3B5C225DEDAD00C59EA7 /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				1FBA3B4F225CC21900C59EA7 /* ApiClient.swift */,
 				1FBA3B5D225DEDC000C59EA7 /* UsersClient.swift */,
 			);
 			path = Clients;
+			sourceTree = "<group>";
+		};
+		1FBA3B612260C59A00C59EA7 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				1FBA3B5C225DEDAD00C59EA7 /* Clients */,
+				1FBA3B622260C5D300C59EA7 /* Protocols */,
+				1FBA3B59225DED4700C59EA7 /* Routers */,
+				1FBA3B55225DE1C200C59EA7 /* ApiConstants.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		1FBA3B622260C5D300C59EA7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1FBA3B51225CC26100C59EA7 /* ApiConfiguration.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		1FBA3B642260C86600C59EA7 /* BundleFiles */ = {
+			isa = PBXGroup;
+			children = (
+				1FE015E42177BB4F006CD11F /* Info.plist */,
+			);
+			path = BundleFiles;
+			sourceTree = "<group>";
+		};
+		1FBA3B652260C8D400C59EA7 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				1FE015ED2177BF68006CD11F /* Realm */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		1FBA3B672260D59100C59EA7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0DC75A64217A576D003DF6BF /* Assets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		1FBA3B682260D6E600C59EA7 /* UserTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1FE015FA2177DBB7006CD11F /* UsersTableViewController.swift */,
+			);
+			path = UserTableViewController;
+			sourceTree = "<group>";
+		};
+		1FBA3B692260D6F900C59EA7 /* SavedUsersTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0DC75A582178D375003DF6BF /* SavedUsersTableViewController.swift */,
+			);
+			path = SavedUsersTableViewController;
+			sourceTree = "<group>";
+		};
+		1FBA3B6A2260D70900C59EA7 /* DetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0DC75A602178DC71003DF6BF /* DetailsViewController.swift */,
+			);
+			path = DetailsViewController;
+			sourceTree = "<group>";
+		};
+		1FBA3B6C2260D74800C59EA7 /* TabBarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0DC75A74217D2C95003DF6BF /* TabBarViewController.swift */,
+			);
+			path = TabBarViewController;
+			sourceTree = "<group>";
+		};
+		1FBA3B6D2260D75E00C59EA7 /* UserTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				1FE016022177EAE8006CD11F /* UserTableViewCell.swift */,
+			);
+			path = UserTableViewCell;
 			sourceTree = "<group>";
 		};
 		1FE015CC2177BB4D006CD11F = {
@@ -171,38 +255,34 @@
 		1FE015D72177BB4D006CD11F /* UsersListApp */ = {
 			isa = PBXGroup;
 			children = (
-				0DC75A64217A576D003DF6BF /* Assets */,
-				0DC75A65217A5788003DF6BF /* Controllers */,
+				1FBA3B612260C59A00C59EA7 /* API */,
+				1FBA3B642260C86600C59EA7 /* BundleFiles */,
+				1FBA3B672260D59100C59EA7 /* Resources */,
+				1FBA3B652260C8D400C59EA7 /* ThirdParty */,
+				0DC75A65217A5788003DF6BF /* ViewControllers */,
 				0DC75A62217A5698003DF6BF /* Models */,
-				1FE015ED2177BF68006CD11F /* Service */,
-				1FBA3B5C225DEDAD00C59EA7 /* Clients */,
-				1FBA3B59225DED4700C59EA7 /* Routers */,
-				1FE015EA2177BDFD006CD11F /* Support Classes */,
+				1FE015EA2177BDFD006CD11F /* Pods */,
 				0DC75A63217A56A6003DF6BF /* Views */,
 				1FE015D82177BB4D006CD11F /* AppDelegate.swift */,
 			);
 			path = UsersListApp;
 			sourceTree = "<group>";
 		};
-		1FE015EA2177BDFD006CD11F /* Support Classes */ = {
+		1FE015EA2177BDFD006CD11F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				0DC75A6E217B0B04003DF6BF /* Podfile.lock */,
-				1FE015E42177BB4F006CD11F /* Info.plist */,
 				1FE015EB2177BE2C006CD11F /* Podfile */,
 			);
-			path = "Support Classes";
+			path = Pods;
 			sourceTree = "<group>";
 		};
-		1FE015ED2177BF68006CD11F /* Service */ = {
+		1FE015ED2177BF68006CD11F /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				0DC75A70217B6083003DF6BF /* StorageService.swift */,
-				1FBA3B4F225CC21900C59EA7 /* ApiClient.swift */,
-				1FBA3B51225CC26100C59EA7 /* ApiConfiguration.swift */,
-				1FBA3B55225DE1C200C59EA7 /* ApiConstants.swift */,
+				0DC75A70217B6083003DF6BF /* RealmStorageService.swift */,
 			);
-			path = Service;
+			path = Realm;
 			sourceTree = "<group>";
 		};
 		8F5E720C2C6794CFFD061B9A /* Pods */ = {
@@ -370,7 +450,7 @@
 				1FEBF7D0225798100092E3BD /* UsersDataSource.swift in Sources */,
 				1FE015D92177BB4D006CD11F /* AppDelegate.swift in Sources */,
 				0DC75A75217D2C95003DF6BF /* TabBarViewController.swift in Sources */,
-				0DC75A71217B6083003DF6BF /* StorageService.swift in Sources */,
+				0DC75A71217B6083003DF6BF /* RealmStorageService.swift in Sources */,
 				0DC75A612178DC71003DF6BF /* DetailsViewController.swift in Sources */,
 				1FBA3B60225F438300C59EA7 /* StoredImageURL.swift in Sources */,
 				1FBA3B50225CC21900C59EA7 /* ApiClient.swift in Sources */,
@@ -522,7 +602,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3R4379KLS7;
-				INFOPLIST_FILE = "$(SRCROOT)/UsersListApp/Support Classes/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/UsersListApp/BundleFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -542,7 +622,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3R4379KLS7;
-				INFOPLIST_FILE = "$(SRCROOT)/UsersListApp/Support Classes/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/UsersListApp/BundleFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

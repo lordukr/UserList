@@ -47,14 +47,14 @@ class UsersTableViewController: UITableViewController, DTTableViewManageable {
             let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alert.addAction(alertAction)
             
-            self.present(alert, animated: true, completion: nil)
+            present(alert, animated: true, completion: nil)
         }
     }
 }
 
 extension UsersTableViewController: UserDataSourceDelegate {
     func didLoadData() {
-        self.manager.memoryStorage.addItems(dataSource.models)
+        manager.memoryStorage.addItems(dataSource.models)
     }
     
     func didFail(with error: Error) {
@@ -62,6 +62,6 @@ extension UsersTableViewController: UserDataSourceDelegate {
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(okAction)
         
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 }

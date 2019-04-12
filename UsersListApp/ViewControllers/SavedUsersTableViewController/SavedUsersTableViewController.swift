@@ -67,15 +67,15 @@ class SavedUsersTableViewController: UITableViewController, DTTableViewManageabl
             let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alert.addAction(alertAction)
 
-            self.present(alert, animated: true, completion: nil)
+            present(alert, animated: true, completion: nil)
         }
     }
 }
 
 extension SavedUsersTableViewController: UserDataSourceDelegate {
     func didLoadData() {
-        self.manager.memoryStorage.removeAllItems()
-        self.manager.memoryStorage.addItems(dataSource.models)
+        manager.memoryStorage.removeAllItems()
+        manager.memoryStorage.addItems(dataSource.models)
     }
     
     func didFail(with error: Error) {
@@ -83,6 +83,6 @@ extension SavedUsersTableViewController: UserDataSourceDelegate {
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(okAction)
         
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 }

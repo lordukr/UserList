@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class StorageService: NSObject {
+class RealmStorageService: NSObject {
     var realm: Realm? {
         do {
             return try Realm()
@@ -23,7 +23,7 @@ class StorageService: NSObject {
 
     var results: Results<StoredUser>? {
         get {
-            return self.realm?.objects(StoredUser.self).sorted(byKeyPath: "insertDate", ascending: true)
+            return realm?.objects(StoredUser.self).sorted(byKeyPath: "insertDate", ascending: true)
         }
     }
 }
