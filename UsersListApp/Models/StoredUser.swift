@@ -18,8 +18,8 @@ class StoredUser: Object {
     @objc dynamic var insertDate: Date = Date()
 }
 
-extension StoredUser: Comparable {
-    static func < (lhs: StoredUser, rhs: StoredUser) -> Bool {
+extension StoredUser {
+    static func == (lhs: StoredUser, rhs: StoredUser) -> Bool {
         if lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName && rhs.phoneNumber == lhs.phoneNumber {
             return true
         } else {
