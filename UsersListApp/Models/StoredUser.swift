@@ -10,16 +10,16 @@ import UIKit
 import RealmSwift
 
 class StoredUser: Object {
-    @objc dynamic var firstName: String?
-    @objc dynamic var lastName: String?
-    @objc dynamic var phoneNumber: String?
-    @objc dynamic var email: String?
-    @objc dynamic var avatarURLs: StoredImageURL?
-    @objc dynamic var insertDate: Date?
+    @objc dynamic var firstName: String = ""
+    @objc dynamic var lastName: String = ""
+    @objc dynamic var phoneNumber: String = ""
+    @objc dynamic var email: String = ""
+    @objc dynamic var avatarURLs: StoredImageURL? = StoredImageURL()
+    @objc dynamic var insertDate: Date = Date()
 }
 
-extension StoredUser: Comparable {
-    static func < (lhs: StoredUser, rhs: StoredUser) -> Bool {
+extension StoredUser {
+    static func == (lhs: StoredUser, rhs: StoredUser) -> Bool {
         if lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName && rhs.phoneNumber == lhs.phoneNumber {
             return true
         } else {
@@ -30,6 +30,6 @@ extension StoredUser: Comparable {
 
 extension StoredUser {
     func fullName() -> String {
-        return (firstName ?? "") + " " + (lastName ?? "")
+        return firstName + " " + lastName
     }
 }

@@ -21,15 +21,22 @@ struct User: Codable {
         case userPhotoURL = "picture"
         case userEmail = "email"
     }
+    
+    init(with model: StoredUser) {
+        let fullName = UserFullName(firstName: model.firstName, lastName: model.lastName)
+        userFullName = fullName
+        phoneNumber = model.phoneNumber
+        userEmail = model.email
+        let avatarModel = UserAvatar(with: model.avatarURLs?.large, thumb: model.avatarURLs?.thumbnail)
+        userPhotoURL = avatarModel
+    }
 }
 
 struct UserFullName: Codable {
-    var title: String
     var firstName: String
     var lastName: String
     
     enum CodingKeys: String, CodingKey {
-        case title
         case firstName = "first"
         case lastName = "last"
     }
@@ -37,16 +44,25 @@ struct UserFullName: Codable {
 
 extension UserFullName {
     func userFullName() -> String {
-        return title + "." + firstName + " " + lastName
+        return firstName + " " + lastName
     }
 }
 
 struct UserAvatar: Codable {
-    var large: String
-    var thumb: String
+    var large: String = ""
+    var thumb: String = ""
     
     enum CodingKeys: String, CodingKey {
         case large
         case thumb = "thumbnail"
+    }
+    
+    init(with large: String?, thumb: String?) {
+        if let large = large {
+            self.large = large
+        }
+        if let thumb = thumb {
+            self.thumb = thumb
+        }
     }
 }

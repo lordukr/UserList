@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2Ca-Fg-zeK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <!--Users-->
         <scene sceneID="jwA-t4-pDS">
             <objects>
-                <tableViewController id="FtW-Ad-gCK" customClass="UsersTableViewController" customModule="UsersListApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="UsersTableViewController" id="FtW-Ad-gCK" customClass="UsersTableViewController" customModule="UsersListApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dSx-kl-s5x">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -26,18 +26,15 @@
                     <navigationItem key="navigationItem" title="Users" id="vYU-pH-lHY">
                         <barButtonItem key="backBarButtonItem" title=" " id="1Te-p5-h8O"/>
                     </navigationItem>
-                    <connections>
-                        <segue destination="ODe-IC-C9C" kind="show" identifier="showDetailsSegue" id="TAc-lA-gHa"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pC5-Pq-fPq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="572" y="183.95802098950526"/>
+            <point key="canvasLocation" x="-415" y="206"/>
         </scene>
         <!--Saved-->
         <scene sceneID="a0j-HN-3SZ">
             <objects>
-                <tableViewController id="0gb-hb-QpE" customClass="SavedUsersTableViewController" customModule="UsersListApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SavedUsersTableViewController" id="0gb-hb-QpE" customClass="SavedUsersTableViewController" customModule="UsersListApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CFY-ef-cw3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -50,59 +47,21 @@
                     <navigationItem key="navigationItem" title="Saved" id="koR-mG-6YW">
                         <barButtonItem key="backBarButtonItem" title=" " id="6We-CL-7Xg"/>
                     </navigationItem>
-                    <connections>
-                        <segue destination="ODe-IC-C9C" kind="show" identifier="showDetailsSegue" id="hPL-od-zAR"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LGu-cO-Wdg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="572" y="932"/>
-        </scene>
-        <!--Saved-->
-        <scene sceneID="o2G-SL-cj4">
-            <objects>
-                <navigationController id="huD-sP-uip" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Saved" image="savedUsersTabBarItemInActive" selectedImage="savedUsersTabBarItemActive" id="diF-Uz-8Aa"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6KK-og-Ew4">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="0gb-hb-QpE" kind="relationship" relationship="rootViewController" id="cwm-kB-SHz"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d5G-FG-gcl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-409" y="933"/>
-        </scene>
-        <!--Tab Bar View Controller-->
-        <scene sceneID="31E-UI-vEd">
-            <objects>
-                <tabBarController id="2Ca-Fg-zeK" customClass="TabBarViewController" customModule="UsersListApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rZv-aY-lzr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="bkY-7N-HPG" kind="relationship" relationship="viewControllers" id="RMf-SL-Gij"/>
-                        <segue destination="huD-sP-uip" kind="relationship" relationship="viewControllers" id="pyT-xP-7RT"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="37W-xE-rTj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1327" y="590"/>
+            <point key="canvasLocation" x="-415" y="909"/>
         </scene>
         <!--Edit User Profile-->
         <scene sceneID="flV-bI-mgL">
             <objects>
-                <viewController title="Edit User Profile" id="ODe-IC-C9C" customClass="DetailsViewController" customModule="UsersListApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailsViewController" title="Edit User Profile" id="ODe-IC-C9C" customClass="DetailsViewController" customModule="UsersListApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q4W-Mb-bps">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gMt-hh-WhQ">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZRh-N6-yGF">
                                         <rect key="frame" x="147.5" y="20" width="80" height="80"/>
@@ -260,33 +219,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tOB-rH-XUy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1660" y="589.65517241379314"/>
-        </scene>
-        <!--Users-->
-        <scene sceneID="MYE-Y3-Iwo">
-            <objects>
-                <navigationController id="bkY-7N-HPG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Users" image="usersTabBarItemInActive" selectedImage="usersTabBarItemActive" id="0wC-Gd-LRm"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Fs-D8-wix">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="FtW-Ad-gCK" kind="relationship" relationship="rootViewController" id="Tpj-Nr-mB3"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="csr-TL-11E" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-383" y="184"/>
+            <point key="canvasLocation" x="838" y="604"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="savedUsersTabBarItemActive" width="28" height="26"/>
-        <image name="savedUsersTabBarItemInActive" width="28" height="26"/>
-        <image name="usersTabBarItemActive" width="34" height="23"/>
-        <image name="usersTabBarItemInActive" width="34" height="23"/>
-    </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="hPL-od-zAR"/>
-    </inferredMetricsTieBreakers>
 </document>

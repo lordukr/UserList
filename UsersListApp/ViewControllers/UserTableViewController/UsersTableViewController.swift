@@ -12,10 +12,11 @@ import SDWebImage
 import DTModelStorage
 import DTTableViewManager
 
-class UsersTableViewController: UITableViewController, DTTableViewManageable {
+class UsersTableViewController: UITableViewController, Instansestiated, DTTableViewManageable {
     
     var selectedUser: User?
     let dataSource = UserDataSource()
+    var delegate: TabBarViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,32 +30,27 @@ class UsersTableViewController: UITableViewController, DTTableViewManageable {
             manager.register(cellType)
             manager.didSelect(cellType, { ( _, modelType, indexPath) in
                 self?.selectedUser = modelType
-                self?.performSegue(withIdentifier: "showDetailsSegue", sender: nil)
+                self?.showDetailsVC()
             })
         }
         
-        dataSource.loadUsers()
+        dataSource.getUsers()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let viewController = segue.destination as? DetailsViewController
-        
+    func showDetailsVC() {
+        let vc = DetailsViewController.instansetiate()
+        vc.delegate = self
         if let user = selectedUser {
-            viewController?.selectedUser = user
-            viewController?.isAdd = true
-        } else {
-            let alert = UIAlertController(title: "Error", message: "Failed to open user", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-            alert.addAction(alertAction)
-            
-            self.present(alert, animated: true, completion: nil)
+            vc.selectedUser = user
         }
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension UsersTableViewController: UserDataSourceDelegate {
     func didLoadData() {
-        self.manager.memoryStorage.addItems(dataSource.models)
+        manager.memoryStorage.addItems(dataSource.models)
     }
     
     func didFail(with error: Error) {
@@ -62,6 +58,14 @@ extension UsersTableViewController: UserDataSourceDelegate {
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(okAction)
         
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension UsersTableViewController: DetailsViewControllerDelegate {
+    func didAddUser(vc: UIViewController) {
+        
+        navigationController?.popViewController(animated: true)
+        self.delegate?.setSelectedViewController(with: .savedUsers)
     }
 }

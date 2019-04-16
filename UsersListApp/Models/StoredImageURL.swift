@@ -10,6 +10,6 @@ import Foundation
 import RealmSwift
 
 class StoredImageURL: Object {
-    @objc dynamic var thumbnail: String?
-    @objc dynamic var large: String?
+    @objc dynamic var thumbnail: String = ""
+    @objc dynamic var large: String = ""
 }

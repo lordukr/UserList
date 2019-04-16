@@ -9,8 +9,10 @@
 import UIKit
 import DTTableViewManager
 
-class SavedUsersTableViewController: UITableViewController, DTTableViewManageable {
+class SavedUsersTableViewController: UITableViewController, Instansestiated, DTTableViewManageable {
+    
     var selectedUser: User?
+    var delegate: TabBarViewControllerDelegate?
     
     let dataSource = UserDataSource()
     
@@ -23,7 +25,7 @@ class SavedUsersTableViewController: UITableViewController, DTTableViewManageabl
             manager.register(cellType)
             manager.didSelect(cellType, { ( _, modelType, indexPath) in
                 self?.selectedUser = modelType
-                self?.performSegue(withIdentifier: "showDetailsSegue", sender: nil)
+                self?.showDetailsVC()
             })
             manager.trailingSwipeActionsConfiguration(for: cellType, { ( _, modelType, indexPath) -> UISwipeActionsConfiguration? in
                 
@@ -53,7 +55,7 @@ class SavedUsersTableViewController: UITableViewController, DTTableViewManageabl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        dataSource.loadLocalUsers()
+        dataSource.getLocalUsers()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,15 +69,23 @@ class SavedUsersTableViewController: UITableViewController, DTTableViewManageabl
             let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alert.addAction(alertAction)
 
-            self.present(alert, animated: true, completion: nil)
+            present(alert, animated: true, completion: nil)
         }
+    }
+    
+    func showDetailsVC() {
+        let vc = DetailsViewController.instansetiate()
+        vc.delegate = self
+        vc.selectedUser = selectedUser
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension SavedUsersTableViewController: UserDataSourceDelegate {
     func didLoadData() {
-        self.manager.memoryStorage.removeAllItems()
-        self.manager.memoryStorage.addItems(dataSource.models)
+        manager.memoryStorage.removeAllItems()
+        manager.memoryStorage.addItems(dataSource.models)
     }
     
     func didFail(with error: Error) {
@@ -83,6 +93,6 @@ extension SavedUsersTableViewController: UserDataSourceDelegate {
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(okAction)
         
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 }
