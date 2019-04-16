@@ -22,7 +22,12 @@ enum ErrorValidationType: String {
     case lastName = "Last Name"
 }
 
-class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+protocol DetailsViewControllerDelegate {
+    func didAddUser(vc: UIViewController)
+}
+
+class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, Instansestiated {
+    
     @IBOutlet weak var userAvatar: UIImageView!
     @IBOutlet weak var changePhotoLabel: UILabel!
     @IBOutlet weak var userDetailsBackground: UIView!
@@ -34,6 +39,7 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     var pickedImageURL: NSURL?
     
+    var delegate: DetailsViewControllerDelegate?
     var isAdd: Bool?
     var selectedUser: User! = nil
     
@@ -309,7 +315,6 @@ class DetailsViewController: UIViewController, UIImagePickerControllerDelegate, 
             dataSource.saveUser(usr)
         }
         
-        navigationController?.popToRootViewController(animated: false)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AZTabBarRequestAction"), object: nil)
+        delegate?.didAddUser(vc: self)
     }
 }

@@ -34,7 +34,7 @@ class UserDataSource {
     var page: Int = 1
     var models: [User] = [User]()
     
-    func loadUsers() {
+    func getUsers() {
         UsersClient.usersList(items: K.count, page: page) { (response) in
             switch response.result {
             case .success(let result):
@@ -47,7 +47,7 @@ class UserDataSource {
         }
     }
     
-    func loadLocalUsers() {
+    func getLocalUsers() {
         guard let data = realm?.objects(StoredUser.self).sorted(byKeyPath: "insertDate", ascending: true) else {
             return
         }
@@ -118,11 +118,5 @@ class UserDataSource {
                 print(error)
             }
         }
-    }
-}
-
-extension Results {
-    func toArray<T>(type: T.Type) -> [T] {
-        return compactMap { $0 as? T }
     }
 }
